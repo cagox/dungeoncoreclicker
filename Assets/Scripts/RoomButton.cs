@@ -44,6 +44,8 @@ public class RoomButton : MonoBehaviour
         RoomIconColor.a = 1;
         RoomIcon.color = RoomIconColor;
 
+        RoomNameText.text = RoomName;
+
         RoomLevel = 0;
         RoomValue = 0;
 
@@ -59,8 +61,13 @@ public class RoomButton : MonoBehaviour
     {
         RoomValue = RoomLevel * LevelValueMultiplier;
         RoomValueText.text = "(" + RoomValue.ToString() + ")";
-        int nextCost = (RoomLevel + 1) * LevelCostMultiplier;
-        RoomLevelText.text = "Level: " + RoomLevel.ToString() + " Next:" + nextCost.ToString();
+        int nextCost = 0;
+        if (RoomLevel != 0 || !LevelOneIsFree)
+        {
+            nextCost = (RoomLevel + 1) * LevelCostMultiplier;
+        }
+
+        RoomLevelText.text = "Level: " + RoomLevel.ToString() + " Next: " + nextCost.ToString();
     }
     
 
