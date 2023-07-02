@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovableElements : MonoBehaviour
 {
     private Transform m_Transform;
+	[SerializeField] private Button upButton;
+	[SerializeField] private Button downButton;
+	[SerializeField] private float moveIncrement;
+
+	private float startLocY;
 
     void Awake()
     {
@@ -12,7 +18,10 @@ public class MovableElements : MonoBehaviour
     }
     void Start()
     {
-        //Get starting X and location. These will be used to help determine bounds.
+		startLocY = m_Transform.position.y;
+		upButton.onClick.AddListener(onUpClick);
+		downButton.onClick.AddListener(onDownClick);
+        
         
     }
 
@@ -21,4 +30,24 @@ public class MovableElements : MonoBehaviour
     {
         
     }
+
+	void onUpClick() 
+	{
+		float newLocY = m_Transform.position.y - moveIncrement;
+		if (newLocY < startLocY)
+		{
+			newLocY = startLocY;
+		}
+
+		m_Transform.position = new Vector3(m_Transform.position.x, newLocY, m_Transform.position.z);
+	}
+
+	void onDownClick()
+	{
+		float newLocY = m_Transform.position.y + moveIncrement;
+		//TODO: Add bounds Checking at this end eventually as well.
+		m_Transform.position = new Vector3(m_Transform.position.x, newLocY, m_Transform.position.z); 
+	}
+
+	
 }

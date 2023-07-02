@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
     public int StoredMana;
     public bool GamePaused;
+	
 
     [SerializeField] private TextMeshProUGUI ManaText;
     
